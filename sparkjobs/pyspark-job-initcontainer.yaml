@@ -1,0 +1,62 @@
+apiVersion: "sparkoperator.k8s.io/v1beta2"
+kind: SparkApplication
+metadata:
+  name: pyspark-job-init
+spec:
+  type: Python
+  pythonVersion: "3"
+  mode: cluster
+  image: hyunsoolee0506/spark:3.5.0
+  imagePullPolicy: Always
+  mainApplicationFile: local:///workspace/pyspark/nos-read-write.py
+  sparkVersion: "3.5.0"
+  timeToLiveSeconds: 120
+  dynamicAllocation:
+    enabled: true
+    initialExecutors: 2
+    minExecutors: 2
+    maxExecutors: 10
+  driver:
+    initContainers:
+    - name: s3-sync-init-driver
+      image: amazon/aws-cli
+      command: ["/bin/sh", "-c"]
+      args: ["-c", "aws s3 sync s3://chunjae-aidt-data-storage/spark-sync /opt/script --endpoint-url=https://kr.object.ncloudstorage.com"]
+      envFrom:
+        - secretRef:
+            name: aws-cli-secret
+    volumeMounts:
+    - name: s3-data
+      mountPath: /workspace/pyspark/script
+    cores: 1
+    coreLimit: "1200m"
+    memory: "512m"
+    labels:
+      version: 3.5.0
+    serviceAccount: spark-spark-operator
+    envFrom:
+      - secretRef:
+          name: ncp-secret-key
+  executor:
+    initContainers:
+    - name: s3-sync-init-executor
+      image: amazon/aws-cli
+      command: ["/bin/sh"]
+      args: ["-c", "aws s3 sync s3://chunjae-aidt-data-storage/spark-sync /opt/script --endpoint-url=https://kr.object.ncloudstorage.com"]
+      envFrom:
+        - secretRef:
+            name: aws-cli-secret
+    volumeMounts:
+    - name: s3-data
+      mountPath: /workspace/pyspark/script
+    cores: 1
+    instances: 1
+    memory: "512m"
+    labels:
+      version: 3.5.0
+    envFrom:
+      - secretRef:
+          name: ncp-secret-key
+  volumes:
+    - name: s3-data
+      emptyDir: {}

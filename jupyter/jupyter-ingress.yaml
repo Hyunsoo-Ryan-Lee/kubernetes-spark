@@ -1,0 +1,21 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: jupyter-ingress
+  annotations:
+    alb.ingress.kubernetes.io/description: 'jupyter'
+    alb.ingress.kubernetes.io/load-balancer-name: 'jupyter-alb'
+  labels:
+    app: jupyter-ingress
+spec:
+  ingressClassName: alb
+  rules:
+  - http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: jupyter
+            port:
+              number: 8888
