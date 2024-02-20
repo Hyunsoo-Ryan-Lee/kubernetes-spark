@@ -25,9 +25,9 @@ spec:
     serviceAccount: spark-spark-operator
     env:
       - name: NCP_ACCESS_KEY_ID
-        value: 
+        value:
       - name: NCP_SECRET_ACCESS_KEY
-        value: 
+        value:
   executor:
     cores: 1
     instances: 1
@@ -36,6 +36,6 @@ spec:
       version: 3.5.0
     env:
       - name: NCP_ACCESS_KEY_ID
-        value: 
+        value:
       - name: NCP_SECRET_ACCESS_KEY
-        value: 
+        value:

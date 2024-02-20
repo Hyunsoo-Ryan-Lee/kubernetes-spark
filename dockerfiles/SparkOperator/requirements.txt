@@ -1,0 +1,10 @@
+pyarrow
+s3fs
+pandas
+trino
+pymysql
+boto3
+elasticsearch
+findspark
+pyspark==3.5.0
+opensearch-py==2.4.2
