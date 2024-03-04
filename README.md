@@ -11,24 +11,24 @@
 │   └── 04_ingress.yaml
 │
 ├── dockerfiles (Spark 관련 Dockerfile 및 docker-compose)
-│   ├── hive
+│   ├── hive (hive metastore Image)
 │   │   ├── 3_0_0
 │   │   │   └── Dockerfile
 │   │   └── 3_1_3
 │   │       └── Dockerfile
 │   │
-│   ├── JupyterLab
+│   ├── JupyterLab (Jupyter Lab for spark develop)
 │   │   ├── Dockerfile
 │   │   └── old
 │   │       ├── Dockerfile-3.1.2
 │   │       └── Dockerfile-3.5.0
 │   │       
-│   ├── SparkCluster
+│   ├── SparkCluster (Local Docker Spark Cluster)
 │   │   ├── docker-compose.yaml
 │   │   └── pyspark-jupyter-lab
 │   │       └── Dockerfile
 │   │
-│   └── SparkOperator
+│   └── SparkOperator (Docker Image for K8S Spark Operator)
 │       ├── Dockerfile
 │       ├── mysql-connector-j-8.3.0.jar
 │       └── requirements.txt
