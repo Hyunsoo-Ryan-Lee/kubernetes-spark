@@ -11,6 +11,12 @@
 │   └── 04_ingress.yaml
 │
 ├── dockerfiles (Spark 관련 Dockerfile 및 docker-compose)
+│   ├── hive
+│   │   ├── 3_0_0
+│   │   │   └── Dockerfile
+│   │   └── 3_1_3
+│   │       └── Dockerfile
+│   │
 │   ├── JupyterLab
 │   │   ├── Dockerfile
 │   │   └── old
