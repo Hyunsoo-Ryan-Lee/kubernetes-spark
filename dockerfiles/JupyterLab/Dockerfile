@@ -11,6 +11,7 @@ ARG spark_checksum="8883c67e0a138069e597f3e7d4edbbd5c3a565d50b28644aad02856a1ec1
 ARG openjdk_version="11"
 ARG aws_hadoop_version="3.3.4"
 ARG aws_sdk_version="1.12.262"
+
 # Ignore interactive action while building docker images
 ARG DEBIAN_FRONTEND=noninteractive
 
@@ -30,10 +31,6 @@ RUN apt-get update && apt-get install openjdk-11-jdk -y
 COPY requirements.txt ./
 RUN pip3 install --upgrade pip  && pip3 install --no-cache-dir -r requirements.txt
 RUN apt-get clean && rm requirements.txt
-
-
-# Install spark relative packages
-RUN pip3 install findspark && pip3 install pyspark==3.5.0
 
 # Spark installation
 WORKDIR /workspace

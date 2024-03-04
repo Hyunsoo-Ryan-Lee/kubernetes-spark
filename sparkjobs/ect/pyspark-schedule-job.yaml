@@ -4,6 +4,7 @@ metadata:
   name: pyspark-job-schedule
 spec:
   schedule: "@every 1m"
+
   concurrencyPolicy: Allow
   template:
     type: Python

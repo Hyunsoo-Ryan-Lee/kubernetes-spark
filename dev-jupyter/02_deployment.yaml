@@ -18,6 +18,9 @@ spec:
           image: hyunsoolee0506/sparklab:0.5
           ports:
             - containerPort: 8888
+              name: jupyter-lab
+            - containerPort: 4040
+              name: spark-ui
           volumeMounts:
             - name: sparkjob-vol
               mountPath: /workspace/spark
